@@ -1,6 +1,26 @@
 ;;; Judge movements, replace pieces if possible
 
 (in-microtheory RuleMt)
+
+(isa RuleMt Microtheory)
 (comment RuleMt
  "RuleMt contains the rules of the game.")
 (genlMt BoardMt RuleMt)
+
+;;; Define horn clause rules
+
+;;; define board
+(<== (isa ?board Junqi-Board)
+     (comleteBoard ?number)
+)
+
+;;; define nodes
+(<== (isa ?node1 Soldier-Station)
+     (isa ?node2 Soldier-Station)
+     (connected ?node1 ?node2)
+)
+
+;;; define movements
+
+
+;;; define winner

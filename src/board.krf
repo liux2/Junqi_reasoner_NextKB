@@ -7,5 +7,32 @@
  "BoardMt contains the status of the game board.")
 (genlMt BoardMt RuleMt)
 
-(isa board Collection)
-(genls board )
+;;; 1. define spec of board
+(isa Junqi-Board Collection)
+(genls Junqi-Board GameBoard)
+(comment Junqi-Board
+  "A board is a gameboard that can host the piece on it.")
+
+;;; check the completness of the board by checking
+;;; the nodes defined by each players.
+(isa comleteBoard Predicate)
+(arity comleteBoard 1)
+(arg1Isa comleteBoard Number)
+
+;;; 2. define spec of node
+(isa Soldier-Station Collection)
+(genls Soldier-Station Node)
+(comment Soldier-Station
+  "A Soldier-Station is a node that can host the piece on it.")
+
+
+;;; define connection
+(isa connected Predicate)
+(arity connected 2)
+(arg1Isa connected Soldier-Station)
+(arg2Isa connected Soldier-Station)
+
+;;; define nodes
+(isa node Predicate)
+(arity node 1)
+(arg1Isa node Soldier-Station)
