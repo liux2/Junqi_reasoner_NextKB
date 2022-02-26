@@ -7,7 +7,14 @@
  "BoardMt contains the status of the game board.")
 (genlMt BoardMt RuleMt)
 
-;;; 1. define spec of board
+;;; 1. define spec of regular board, it should eventually
+;;; equal to Junqi-board
+(isa Chess-Board Collection)
+(genls Chess-Board GameBoard)
+(comment Chess-Board
+  "A board is a gameboard that can host the piece on it.")
+
+;;; 2. define spec of board
 (isa Junqi-Board Collection)
 (genls Junqi-Board GameBoard)
 (comment Junqi-Board
@@ -16,10 +23,11 @@
 ;;; check the completness of the board by checking
 ;;; the nodes defined by each players.
 (isa comleteBoard Predicate)
-(arity comleteBoard 1)
-(arg1Isa comleteBoard Number)
+(arity comleteBoard 2)
+(arg1Isa comleteBoard Chess-Board)
+(arg2Isa comleteBoard Number)
 
-;;; 2. define spec of node
+;;; 3. define spec of node
 (isa Soldier-Station Collection)
 (genls Soldier-Station Node)
 (comment Soldier-Station
