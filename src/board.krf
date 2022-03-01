@@ -1,46 +1,84 @@
 ;;; init game board
-
 (in-microtheory BoardMt)
 
 (isa BoardMt Microtheory)
 (comment BoardMt
  "BoardMt contains the status of the game board.")
-(genlMt BoardMt RuleMt)
+(genlMt MainMt BoardMt)
 
-;;; 1. define spec of regular board, it should eventually
-;;; equal to Junqi-board
-(isa Chess-Board Collection)
-(genls Chess-Board GameBoard)
-(comment Chess-Board
-  "A board is a gameboard that can host the piece on it.")
+;;; Initilize a board
+(isa node0 Soldier-Station)
+(hasRole node0 Empty)
 
-;;; 2. define spec of board
-(isa Junqi-Board Collection)
-(genls Junqi-Board GameBoard)
-(comment Junqi-Board
-  "A board is a gameboard that can host the piece on it.")
+(isa node1 Soldier-Station)
+(hasRole node1 Empty)
 
-;;; check the completness of the board by checking
-;;; the nodes defined by each players.
-(isa comleteBoard Predicate)
-(arity comleteBoard 2)
-(arg1Isa comleteBoard Chess-Board)
-(arg2Isa comleteBoard Number)
+(isa node2 Soldier-Station)
+(hasRole node2 Empty)
 
-;;; 3. define spec of node
-(isa Soldier-Station Collection)
-(genls Soldier-Station Node)
-(comment Soldier-Station
-  "A Soldier-Station is a node that can host the piece on it.")
+(isa node3 Soldier-Station)
+(hasRole node3 Empty)
 
+(isa node4 Soldier-Station)
+(hasRole node4 Empty)
 
-;;; define connection
-(isa connected Predicate)
-(arity connected 2)
-(arg1Isa connected Soldier-Station)
-(arg2Isa connected Soldier-Station)
+(isa node5 Soldier-Station)
+(hasRole node5 Empty)
 
-;;; define nodes
-(isa node Predicate)
-(arity node 1)
-(arg1Isa node Soldier-Station)
+(isa node6 Soldier-Station)
+(hasRole node6 Empty)
+
+(isa node7 Soldier-Station)
+(hasRole node7 Empty)
+
+(isa node8 Soldier-Station)
+(hasRole node8 Empty)
+
+(isa node9 Soldier-Station)
+(hasRole node9 Empty)
+
+(isa node10 Soldier-Station)
+(hasRole node10 Empty)
+
+(isa node11 Soldier-Station)
+(hasRole node11 Empty)
+
+(isa node12 Soldier-Station)
+(hasRole node12 Empty)
+
+(isa node13 Soldier-Station)
+(hasRole node13 Empty)
+
+(isa node14 Soldier-Station)
+(hasRole node14 Empty)
+
+(connected node0 node1)
+(connected node0 node3)
+(connected node0 node4)
+(connected node1 node2)
+(connected node1 node4)
+(connected node2 node4)
+(connected node2 node5)
+(connected node3 node4)
+(connected node3 node6)
+(connected node4 node5)
+(connected node4 node6)
+(connected node4 node7)
+(connected node4 node8)
+(connected node5 node8)
+(connected node6 node7)
+(connected node6 node9)
+(connected node6 node10)
+(connected node7 node8)
+(connected node7 node10)
+(connected node8 node10)
+(connected node8 node11)
+(connected node9 node10)
+(connected node9 node12)
+(connected node10 node11)
+(connected node10 node12)
+(connected node10 node13)
+(connected node10 node14)
+(connected node11 node14)
+(connected node12 node13)
+(connected node13 node14)

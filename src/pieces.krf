@@ -1,0 +1,14 @@
+;;; Arrangement of pieces
+(in-microtheory PieceMt)
+
+(isa PieceMt Microtheory)
+(comment PieceMt
+ "PieceMt initilizes pieces.")
+(genlMt MainMt PieceMt)
+
+(isa Flag Role)
+
+;;; Player 1 (0-5)
+(put Flag node0)
+
+;;; Player 2 (9-15)

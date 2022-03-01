@@ -5,9 +5,16 @@
 (isa RuleMt Microtheory)
 (comment RuleMt
  "RuleMt contains the rules of the game.")
-(genlMt BoardMt RuleMt)
+(genlMt MainMt RuleMt)
 
 ;;; Define horn clause rules
+
+;;; define empty board
+(<== (isa ?board Chess-Board)
+     (hasRole ?node Empty)
+     (connected ?node ?node)
+     ;;; (How to/ should we) define connection?
+)
 
 ;;; define board
 (<== (isa ?board Junqi-Board)
@@ -18,19 +25,19 @@
      (evaluate ?newNumber (PlusFn ?number 1))
      (comleteBoard ?board ?number)
      ;;; fact: put new chess on board
+     (put ?role ?node)
      (boardState ?board InitBoard)
-     ;;; init but not start
+     (uninferredSentence (boardState ?board StartBoard))
 )
 
-;;;
+;; define start state
 (<== (boardState ?board StartBoard)
      (comleteBoard ?board 12)
 )
 
 ;;; define nodes
-(<== (isa ?node1 Soldier-Station)
-     (isa ?node2 Soldier-Station)
-     (connected ?node1 ?node2)
+(<== (isa ?node Soldier-Station)
+     (hasRole ?node Empty)
 )
 
 ;;; define movements

@@ -1,0 +1,54 @@
+;;; Ontology for Junqi
+
+(in-microtheory MainMt)
+
+(isa MainMt Microtheory)
+(comment MainMt
+ "MainMt contains the idea of the board and the referee.")
+(genlMt MainMt BoardMt)
+
+;;; 1. define spec of regular board, it should eventually
+;;; equal to Junqi-board
+(isa Chess-Board Collection)
+(genls Chess-Board GameBoard)
+(comment Chess-Board
+  "A board is a gameboard that can host the piece on it.")
+
+;;; 2. define spec of board
+(isa Junqi-Board Collection)
+(genls Junqi-Board GameBoard)
+(comment Junqi-Board
+  "A board is a gameboard that can host Junqi on it.")
+
+;;; check the completness of the board by checking
+;;; the nodes defined by each players.
+(isa comleteBoard Predicate)
+(arity comleteBoard 2)
+(arg1Isa comleteBoard Chess-Board)
+(arg2Isa comleteBoard Number)
+
+;;; 3. define spec of node
+(isa Soldier-Station Collection)
+(genls Soldier-Station Node)
+(comment Soldier-Station
+  "A Soldier-Station is a node that can host
+    the piece on it.")
+
+(isa hasRole Predicate)
+(arity hasRole 2)
+(arg1Isa connected Soldier-Station)
+(arg2Isa connected Role)
+
+;;; define connection
+(isa connected Predicate)
+(arity connected 2)
+(arg1Isa connected Soldier-Station)
+(arg2Isa connected Soldier-Station)
+
+;;; Put new pieces
+(isa put Predicate)
+(arity connected 2)
+(arg1Isa put Role)
+(arg2Isa put Soldier-Station)
+
+;;; move pieces
