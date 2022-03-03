@@ -9,23 +9,28 @@
 
 ;;; 1. define spec of regular board, it should eventually
 ;;; equal to Junqi-board
-(isa Chess-Board Collection)
-(genls Chess-Board GameBoard)
-(comment Chess-Board
-  "A board is a gameboard that can host the piece on it.")
+(isa Empty-Board Collection)
+(genls Empty-Board GameBoard)
+(comment Empty-Board
+  "An empty board is a gameboard that empty.")
 
 ;;; 2. define spec of board
 (isa Junqi-Board Collection)
-(genls Junqi-Board GameBoard)
+(genls Junqi-Board Empty-Board)
 (comment Junqi-Board
-  "A board is a gameboard that can host Junqi on it.")
+  "A junqi board is a gameboard that can play Junqi on it.")
 
 ;;; check the completness of the board by checking
 ;;; the nodes defined by each players.
 (isa comleteBoard Predicate)
 (arity comleteBoard 2)
-(arg1Isa comleteBoard Chess-Board)
+(arg1Isa comleteBoard Empty-Board)
 (arg2Isa comleteBoard Number)
+
+(isa boardState Predicate)
+(arity boardState 2)
+(arg1Isa comleteBoard GameBoard)
+(arg2Isa comleteBoard StateChange)
 
 ;;; 3. define spec of node
 (isa Soldier-Station Collection)
@@ -39,11 +44,26 @@
 (arg1Isa connected Soldier-Station)
 (arg2Isa connected Role)
 
+(isa areEmpty Predicate)
+(arity areEmpty 2)
+(arg1Isa areEmpty GameBoard)
+(arg2Isa areEmpty Number)
+
+(isa hasRank predicate)
+(arity hasRank 2)
+(arg1Isa connected Role)
+(arg2Isa connected Number)
+
 ;;; define connection
 (isa connected Predicate)
 (arity connected 2)
 (arg1Isa connected Soldier-Station)
 (arg2Isa connected Soldier-Station)
+
+(isa hasConnection Predicate)
+(arity hasConnection 2)
+(arg1Isa comleteBoard GameBoard)
+(arg2Isa comleteBoard Number)
 
 ;;; Put new pieces
 (isa put Predicate)
@@ -52,3 +72,20 @@
 (arg2Isa put Soldier-Station)
 
 ;;; move pieces
+(isa move Predicate)
+(arity move 2)
+(arg1Isa put Soldier-Station)
+(arg2Isa put Soldier-Station)
+
+(isa isLegal Predicate)
+(arity isLegal 4)
+(arg1Isa isLegal Soldier-Station)
+(arg2Isa isLegal Soldier-Station)
+(arg3Isa isLegal Relation)
+(arg4Isa isLegal StateChange)
+
+(isa contestResult Predicate)
+(arity contestResult 3)
+(arg1Isa contestResult Soldier-Station)
+(arg2Isa contestResult Soldier-Station)
+(arg3Isa contestResult Realtion)

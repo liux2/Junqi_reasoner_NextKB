@@ -8,39 +8,119 @@
 (genlMt MainMt RuleMt)
 
 ;;; Define horn clause rules
-
-;;; define empty board
-(<== (isa ?board Chess-Board)
-     (hasRole ?node Empty)
-     (connected ?node ?node)
-     ;;; (How to/ should we) define connection?
+;;; define empty board ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<== (isa ?board Empty-Board)
+     (boardState ?board isBoard)
 )
 
-;;; define board
+(<== (hasConnection ?board ?newNumber)
+     (evaluate ?newNumber
+        (CardinalityFn
+         (TheClosedRetrievalSetOf
+          (connected ?node1 ?node2)
+          (connected ?node1 ?node2))))
+     (boardState ?board noneBoard)
+     (uninferredSentence (boardState ?board isBoard))
+)
+
+(<== (areEmpty ?board ?newNumber)
+     (evaluate ?newNumber
+        (CardinalityFn
+         (TheClosedRetrievalSetOf
+          (hasRole ?node Empty)
+          (hasRole ?node Empty))))
+     (boardState ?board noneBoard)
+     (uninferredSentence (boardState ?board isBoard))
+)
+
+(<== (boardState ?board isBoard)
+     (hasConnection ?board 30)
+     (areEmpty ?board 15)
+)
+
+;;; define complete board ;;;;;;;;;;;;;;;;;;;;;;;;
 (<== (isa ?board Junqi-Board)
-     (comleteBoard ?board 12)
+     (boardState ?board StartBoard)
 )
 
 (<== (comleteBoard ?board ?newNumber)
-     (evaluate ?newNumber (PlusFn ?number 1))
-     (comleteBoard ?board ?number)
-     ;;; fact: put new chess on board
-     (put ?role ?node)
-     (boardState ?board InitBoard)
+     (evaluate ?newNumber
+       (CardinalityFn
+        (TheClosedRetrievalSetOf
+         (put ?role ?node)
+         (put ?role ?node))))
+     (boardState ?board isBoard)
      (uninferredSentence (boardState ?board StartBoard))
 )
 
-;; define start state
+;;; define start state
 (<== (boardState ?board StartBoard)
      (comleteBoard ?board 12)
 )
 
 ;;; define nodes
-(<== (isa ?node Soldier-Station)
-     (hasRole ?node Empty)
+(<== (hasRole ?node ?role)
+     (isa ?node Soldier-Station)
+     (put ?role ?node)
+     ;;; todo: delete the previous one
 )
 
 ;;; define movements
+(<== (hasRole ?node2 ?role)
+     (isa ?node2 Soldier-Station)
+     (move ?node1 ?node2)
+     (isLegal ?node1 ?node2 isBigger Legal)
+     ;;; todo: overide info
 
+)
 
-;;; define winner
+(<== (hasRole ?node2 ?role)
+     (isa ?node2 Soldier-Station)
+     (move ?node1 ?node2)
+     (isLegal ?node1 ?node2 isEqual Legal)
+     ;;; todo: overide info
+)
+
+; (<== (elementTest ?n)
+;      (evaluate ?lst
+;         (TheSet a b))
+;      (elementOf ?n ?lst)
+; )
+
+(<== (isLegal ?node1 ?node2 isBigger Legal)
+     ;;; todo: get all legal moves
+     (TheClosedRetrievalSetOf ?node1
+      (connected ?node1 ?node2)
+      )
+     (contestResult ?node1 ?node2 isBigger)
+)
+
+(<== (isLegal ?node1 ?node2 isEqual Legal)
+     ;;; todo: get all legal moves
+     (TheClosedRetrievalSetOf ?node1
+      (connected ?node1 ?node2)
+      )
+     (contestResult ?node1 ?node2 isEqual)
+)
+
+(<== (contestResult ?node1 ?node2 isBigger)
+     ;;; compare rank
+     (hasRank ?node1 ?rank1)
+     (hasRank ?node2 ?rank2)
+     (evaluate ?result
+        (GreaterThan-UnitValuesFn ?rank1 ?rank2))
+)
+
+(<== (contestResult ?node1 ?node2 isEqual)
+     ;;; compare rank
+     (hasRank ?node1 ?rank1)
+     (hasRank ?node2 ?rank2)
+     (evaluate ?result
+        (EqualTo-UnitValuesFn ?rank1 ?rank2))
+)
+
+;;; define winning board
+(<== (isWinning ?board ?node winning)
+     ;;; 1. flag is out
+     ;;; 2. only one piece left
+)

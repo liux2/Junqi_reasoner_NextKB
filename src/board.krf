@@ -7,6 +7,8 @@
 (genlMt MainMt BoardMt)
 
 ;;; Initilize a board
+(boardState newBoard noneBoard)
+
 (isa node0 Soldier-Station)
 (hasRole node0 Empty)
 

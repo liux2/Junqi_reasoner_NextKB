@@ -6,9 +6,55 @@
  "PieceMt initilizes pieces.")
 (genlMt MainMt PieceMt)
 
-(isa Flag Role)
+;;; init both pieces
+(isa Flag1 Role)
+(isa Flag2 Role)
+
+(isa Colonel1 Role)
+(isa Colonel2 Role)
+
+(isa Major1 Role)
+(isa Major2 Role)
+
+(isa Captain1 Role)
+(isa Captain2 Role)
+
+(isa Lieutenant11 Role)
+(isa Lieutenant21 Role)
+(isa Lieutenant12 Role)
+(isa Lieutenant22 Role)
+
+;;; facts: ranks
+(hasRank Flag1 1)
+(hasRank Flag2 1)
+
+(hasRank Colonel1 2)
+(hasRank Colonel2 2)
+
+(hasRank Major1 3)
+(hasRank Major2 3)
+
+(hasRank Captain1 4)
+(hasRank Captain2 4)
+
+(hasRank Lieutenant11 5)
+(hasRank Lieutenant21 5)
+(hasRank Lieutenant12 5)
+(hasRank Lieutenant22 5)
+
 
 ;;; Player 1 (0-5)
-(put Flag node0)
+(put Flag1 node0)
+(put Lieutenant11 node1)
+(put Lieutenant21 node2)
+(put Captain1 node3)
+(put Major1 node4)
+(put Colonel1 node5)
 
 ;;; Player 2 (9-15)
+(put Flag2 node14)
+(put Lieutenant12 node9)
+(put Major2 node10)
+(put Lieutenant22 node11)
+(put Captain2 node12)
+(put Colonel2 node13)

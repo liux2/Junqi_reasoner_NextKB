@@ -1,1 +1,8 @@
 ;;; play game here
+
+(in-microtheory PlayMt)
+
+(isa PieceMt Microtheory)
+(comment PlayMt
+ "PlayMt plays games.")
+(genlMt MainMt PlayMt)
