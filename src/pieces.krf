@@ -42,7 +42,7 @@
 (hasRank Lieutenant12 5)
 (hasRank Lieutenant22 5)
 
-
+(initPlayer notYet)
 ;;; Player 1 (0-5)
 (put Flag1 node0)
 (put Lieutenant11 node1)

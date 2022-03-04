@@ -13,18 +13,13 @@
      (boardState ?board isBoard)
 )
 
-(<== (hasConnection ?board ?newNumber)
-     (evaluate ?newNumber
+(<== (hasConnection ?board ?newNumber1 ?newNumber2)
+     (evaluate ?newNumber1
         (CardinalityFn
          (TheClosedRetrievalSetOf
           (connected ?node1 ?node2)
           (connected ?node1 ?node2))))
-     (boardState ?board noneBoard)
-     (uninferredSentence (boardState ?board isBoard))
-)
-
-(<== (areEmpty ?board ?newNumber)
-     (evaluate ?newNumber
+     (evaluate ?newNumber2
         (CardinalityFn
          (TheClosedRetrievalSetOf
           (hasRole ?node Empty)
@@ -34,9 +29,9 @@
 )
 
 (<== (boardState ?board isBoard)
-     (hasConnection ?board 30)
-     (areEmpty ?board 15)
+     (hasConnection ?board 30 15)
 )
+
 
 ;;; define complete board ;;;;;;;;;;;;;;;;;;;;;;;;
 (<== (isa ?board Junqi-Board)
@@ -58,69 +53,132 @@
      (comleteBoard ?board 12)
 )
 
-;;; define nodes
-(<== (hasRole ?node ?role)
-     (isa ?node Soldier-Station)
+;;; define nodes ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<== (initPlayer Done)
      (put ?role ?node)
      ;;; todo: delete the previous one
+     (untell (hasRole ?node Empty))
+     (tell (hasRole ?node ?role))
 )
 
-;;; define movements
-(<== (hasRole ?node2 ?role)
-     (isa ?node2 Soldier-Station)
+;;; define movements ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; check if the move is legal
+(<== (isLegal Legal)
      (move ?node1 ?node2)
-     (isLegal ?node1 ?node2 isBigger Legal)
-     ;;; todo: overide info
-
+     ;;; get all legal moves
+     (evaluate ?connectTo
+        (TheClosedRetrievalSetOf (?node1 ?node2)
+        (connected ?node1 ?node2)))
+     (evaluate ?connectWith
+        (TheClosedRetrievalSetOf (?node1 ?node2)
+        (connected ?node2 ?node1)))
+     ;;; if (?node1 ?node2) is in connectTo and connectWith
+     (elementOf (?node1 ?node2) ?connectedWith)
+     (elementOf (?node1 ?node2) ?connectedTo)
+     ;;; check state
+     (contestResult isBigger)
+     (uninferredSentence (contestResult isEqual))
+     (uninferredSentence (contestResult isEmpty))
 )
 
-(<== (hasRole ?node2 ?role)
-     (isa ?node2 Soldier-Station)
+(<== (isLegal Legal)
      (move ?node1 ?node2)
-     (isLegal ?node1 ?node2 isEqual Legal)
-     ;;; todo: overide info
+     ;;; get all legal moves
+     (evaluate ?connectTo
+        (TheClosedRetrievalSetOf (?node1 ?node2)
+        (connected ?node1 ?node2)))
+     (evaluate ?connectWith
+        (TheClosedRetrievalSetOf (?node1 ?node2)
+        (connected ?node2 ?node1)))
+     ;;; if (?node1 ?node2) is in connectTo and connectWith
+     (elementOf (?node1 ?node2) ?connectedWith)
+     (elementOf (?node1 ?node2) ?connectedTo)
+     ;;; check state
+     (contestResult isEqual)
+     (uninferredSentence (contestResult isBigger))
+     (uninferredSentence (contestResult isEmpty))
 )
 
-; (<== (elementTest ?n)
-;      (evaluate ?lst
-;         (TheSet a b))
-;      (elementOf ?n ?lst)
-; )
-
-(<== (isLegal ?node1 ?node2 isBigger Legal)
-     ;;; todo: get all legal moves
-     (TheClosedRetrievalSetOf ?node1
-      (connected ?node1 ?node2)
-      )
-     (contestResult ?node1 ?node2 isBigger)
+(<== (isLegal Legal)
+     (move ?node1 ?node2)
+     ;;;node2 is empty
+     (hasRole ?node2 Empty)
+     ;;; check state
+     (contestResult isEmpty)
+     (uninferredSentence (contestResult isBigger))
+     (uninferredSentence (contestResult isEqual))
 )
 
-(<== (isLegal ?node1 ?node2 isEqual Legal)
-     ;;; todo: get all legal moves
-     (TheClosedRetrievalSetOf ?node1
-      (connected ?node1 ?node2)
-      )
-     (contestResult ?node1 ?node2 isEqual)
-)
-
-(<== (contestResult ?node1 ?node2 isBigger)
+;;; if move is legal, do contest
+(<== (contestResult isBigger)
+     (isLegal Legal)
+     (uninferredSentence (isLegal Illegal))
+     (move ?node1 ?node2)
      ;;; compare rank
      (hasRank ?node1 ?rank1)
      (hasRank ?node2 ?rank2)
      (evaluate ?result
         (GreaterThan-UnitValuesFn ?rank1 ?rank2))
+     ;;; todo: overide info
 )
 
-(<== (contestResult ?node1 ?node2 isEqual)
+(<== (contestResult isEqual)
+     (isLegal Legal)
+     (uninferredSentence (isLegal Illegal))
+     (move ?node1 ?node2)
+     ;;; compare rank
+     (hasRank ?node1 ?rank1)
+     ;;; todo: overide info
+)
+
+(<== (contestResult isEmpty)
+     (isLegal Legal)
+     (uninferredSentence (isLegal Illegal))
+     (move ?node1 ?node2)
      ;;; compare rank
      (hasRank ?node1 ?rank1)
      (hasRank ?node2 ?rank2)
      (evaluate ?result
         (EqualTo-UnitValuesFn ?rank1 ?rank2))
+     ;;; todo: overide info
 )
 
-;;; define winning board
-(<== (isWinning ?board ?node winning)
+;;; define winning board ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(<== (isWinning won)
+     (boardState ?board StartBoard)
      ;;; 1. flag is out
-     ;;; 2. only one piece left
+     (countFlag 1)
+     ;;; 2. only one piece left (14 empty)
+     (uninferredSentence (countLeft 14))
+)
+(<== (isWinning won)
+     (boardState ?board StartBoard)
+     ;;; 1. flag is out
+     (countLeft 14)
+     ;;; 2. only one piece left (14 empty)
+     (uninferredSentence (countFlag 1))
+)
+
+(<== (countFlag ?flagLeft)
+     (evaluate ?piecesLeft1
+        (CardinalityFn
+          (TheClosedRetrievalSetOf
+            (hasRole ?node Flag1)
+            (hasRole ?node Flag1))))
+     (evaluate ?piecesLeft2
+        (CardinalityFn
+          (TheClosedRetrievalSetOf
+            (hasRole ?node Flag2)
+            (hasRole ?node Flag2))))
+     (evaluate ?flagLeft
+        (PlusFn ?piecesLeft1 ?piecesLeft2))
+)
+
+(<== (countLeft ?piecesLeft)
+     (evaluate ?piecesLeft
+        (CardinalityFn
+          (TheClosedRetrievalSetOf
+           (hasRole ?node Empty)
+           (hasRole ?node Empty))))
 )

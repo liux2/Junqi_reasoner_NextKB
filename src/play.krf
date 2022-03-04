@@ -6,3 +6,5 @@
 (comment PlayMt
  "PlayMt plays games.")
 (genlMt MainMt PlayMt)
+
+(isWinning unknown)
