@@ -10,49 +10,20 @@
 (boardState newBoard noneBoard)
 
 (isa node0 Soldier-Station)
-(hasRole node0 Empty)
-
 (isa node1 Soldier-Station)
-(hasRole node1 Empty)
-
 (isa node2 Soldier-Station)
-(hasRole node2 Empty)
-
 (isa node3 Soldier-Station)
-(hasRole node3 Empty)
-
 (isa node4 Soldier-Station)
-(hasRole node4 Empty)
-
 (isa node5 Soldier-Station)
-(hasRole node5 Empty)
-
 (isa node6 Soldier-Station)
-(hasRole node6 Empty)
-
 (isa node7 Soldier-Station)
-(hasRole node7 Empty)
-
 (isa node8 Soldier-Station)
-(hasRole node8 Empty)
-
 (isa node9 Soldier-Station)
-(hasRole node9 Empty)
-
 (isa node10 Soldier-Station)
-(hasRole node10 Empty)
-
 (isa node11 Soldier-Station)
-(hasRole node11 Empty)
-
 (isa node12 Soldier-Station)
-(hasRole node12 Empty)
-
 (isa node13 Soldier-Station)
-(hasRole node13 Empty)
-
 (isa node14 Soldier-Station)
-(hasRole node14 Empty)
 
 (connected node0 node1)
 (connected node0 node3)

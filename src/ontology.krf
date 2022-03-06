@@ -57,10 +57,9 @@
 (arg2Isa connected Soldier-Station)
 
 (isa hasConnection Predicate)
-(arity hasConnection 3)
+(arity hasConnection 2)
 (arg1Isa comleteBoard GameBoard)
 (arg2Isa comleteBoard Number)
-(arg3Isa comleteBoard Number)
 
 ;;; Put new pieces
 (isa put Predicate)
@@ -80,12 +79,26 @@
 (arg2Isa put Soldier-Station)
 
 (isa isLegal Predicate)
-(arity isLegal 1)
-(arg1Isa isLegal StateChange)
+(arity isLegal 3)
+(arg1Isa isLegal Soldier-Station)
+(arg2Isa isLegal Soldier-Station)
+(arg3Isa isLegal StateChange)
 
-(isa contestResult Predicate)
-(arity contestResult 1)
-(arg1Isa contestResult StateChange)
+(isa contestResultEqual Predicate)
+(arity contestResultEqual 3)
+(arg1Isa contestResultEqual Role)
+(arg2Isa contestResultEqual Role)
+(arg3Isa contestResultEqual StateChange)
+
+(isa contestResultBigger Predicate)
+(arity contestResultBigger 3)
+(arg1Isa contestResultBigger Role)
+(arg2Isa contestResultBigger Role)
+(arg3Isa contestResultBigger StateChange)
+
+(isa makeMove Predicate)
+(arity makeMove 1)
+(arg3Isa makeMove StateChange)
 
 ;;; Define winning
 (isa isWinning Predicate)
@@ -95,7 +108,3 @@
 (isa countFlag Predicate)
 (arity countFlag 1)
 (arg1Isa countFlag Number)
-
-(isa countLeft Predicate)
-(arity countLeft 1)
-(arg1Isa countLeft Number)

@@ -28,19 +28,19 @@
 (hasRank Flag1 1)
 (hasRank Flag2 1)
 
-(hasRank Colonel1 2)
-(hasRank Colonel2 2)
+(hasRank Colonel1 5)
+(hasRank Colonel2 5)
 
-(hasRank Major1 3)
-(hasRank Major2 3)
+(hasRank Major1 4)
+(hasRank Major2 4)
 
-(hasRank Captain1 4)
-(hasRank Captain2 4)
+(hasRank Captain1 3)
+(hasRank Captain2 3)
 
-(hasRank Lieutenant11 5)
-(hasRank Lieutenant21 5)
-(hasRank Lieutenant12 5)
-(hasRank Lieutenant22 5)
+(hasRank Lieutenant11 2)
+(hasRank Lieutenant21 2)
+(hasRank Lieutenant12 2)
+(hasRank Lieutenant22 2)
 
 (initPlayer notYet)
 ;;; Player 1 (0-5)
