@@ -43,6 +43,8 @@ Use `bash run-companions.sh` to run.
 
 ### Quary List/ Play sequence
 
+#### Play sequence
+
 **1. Make an empty board**
 
 ```lisp
@@ -80,4 +82,18 @@ Use the `untell` button to retract the fact from working memory.
 
 ```lisp
 (isWinning won)
+```
+
+#### Other Queries
+
+**1. To get the status of the board**
+
+```lisp
+(hasRole ?node1 ?node2)
+```
+
+**2. To get the rank of a piece**
+
+```lisp
+(hasRank ?role ?rank)
 ```
