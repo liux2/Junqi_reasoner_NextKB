@@ -2,7 +2,7 @@
 
 A simple knowledge representation and reasoning project for Luzhanqi chess game.
 
-### Project structures
+## Project structures
 
 ```bash
 .
@@ -32,7 +32,7 @@ table shows:
 |   play.krf   |      MoveMt      | Game state and pieces initilizations |
 |  referee.krf |      RuleMt      | Horn Clauses for reasoning           |
 
-### How to use the companions
+## How to use the companions
 
 The companions project homepage and manual can be found at:
 [https://www.qrg.northwestern.edu/nextkb/index.html](https://www.qrg.northwestern.edu/nextkb/index.html)
@@ -41,9 +41,9 @@ Use `bash pull-companions.sh` to install.
 
 Use `bash run-companions.sh` to run.
 
-### Quary List/ Play sequence
+## Quary List/ Play sequence
 
-#### Play sequence
+### Play sequence
 
 **1. Make an empty board**
 
@@ -84,7 +84,7 @@ Use the `untell` button to retract the fact from working memory.
 (isWinning won)
 ```
 
-#### Other Queries
+### Other Queries
 
 **1. To get the status of the board**
 
@@ -98,7 +98,7 @@ Use the `untell` button to retract the fact from working memory.
 (hasRank ?role ?rank)
 ```
 
-### License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE)
 file for details.
