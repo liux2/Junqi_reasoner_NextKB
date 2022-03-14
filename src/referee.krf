@@ -95,7 +95,7 @@
      ;;; if (?node1 ?node2) is in connectTo and connectWith
      (elementOf (?node1 ?node2) ?connectTo)
      ;;; check state
-     (contestResultBigger ?role1 ?role2 Ture)
+     (contestResultBigger ?role1 ?role2 True)
      (uninferredSentence (contestResultEqual ?role1 ?role2 True))
      ;;; override
      (untell (hasRole ?node1 ?role1))
@@ -113,7 +113,7 @@
      ;;; if (?node1 ?node2) is in connectTo and connectWith
      (elementOf (?node1 ?node2) ?connectedWith)
      ;;; check state
-     (contestResultBigger ?role1 ?role2 Ture)
+     (contestResultBigger ?role1 ?role2 True)
      (uninferredSentence (contestResultEqual ?role1 ?role2 True))
      ;;; override
      (untell (hasRole ?node1 ?role1))
