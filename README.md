@@ -4,7 +4,7 @@ A simple knowledge representation and reasoning project for Luzhanqi chess game.
 
 ### Project structures
 
-```(base)
+```bash
 .
 ├── LICENSE
 ├── README.md
@@ -45,24 +45,24 @@ Use `bash run-companions.sh` to run.
 
 **1. Make an empty board**
 
-```(Lisp)
+```lisp
 (isa ?board Empty-Board)
 ```
 
 **2. Put pieces**
 
-```(Lisp)
+```lisp
 (isa ?board Junqi-Board)
 ```
 
 **3. Initilize pieces from both players**
 
-```(Lisp)
+```lisp
 (initPlayer Done)
 ```
 **4. Tell movement**
 
-```(Lisp)
+```lisp
 (move node4 node7)
 ```
 
@@ -70,7 +70,7 @@ Use the `tell` button to save the fact to working memory.
 
 **5. Make the move**
 
-```(Lisp)
+```lisp
 (makeMove Done)
 ```
 
@@ -78,6 +78,6 @@ Use the `untell` button to retract the fact from working memory.
 
 **6. Validate winning state**
 
-```(Lisp)
+```lisp
 (isWinning won)
 ```
