@@ -76,9 +76,15 @@ Use the `tell` button to save the fact to working memory.
 (makeMove Done)
 ```
 
+**6. Untell movement**
+
+```lisp
+(move node4 node7)
+```
+
 Use the `untell` button to retract the fact from working memory.
 
-**6. Validate winning state**
+**7. Validate winning state**
 
 ```lisp
 (isWinning won)
