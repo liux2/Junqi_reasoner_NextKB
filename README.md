@@ -51,17 +51,24 @@ Use `bash run-companions.sh` to run.
 (isa ?board Empty-Board)
 ```
 
+Use the `query` button to execute.
+
 **2. Put pieces**
 
 ```lisp
 (isa ?board Junqi-Board)
 ```
 
+Use the `query` button to execute.
+
 **3. Initilize pieces from both players**
 
 ```lisp
 (initPlayer Done)
 ```
+
+Use the `query` button to execute.
+
 **4. Tell movement**
 
 ```lisp
@@ -76,6 +83,8 @@ Use the `tell` button to save the fact to working memory.
 (makeMove Done)
 ```
 
+Use the `query` button to execute.
+
 **6. Untell movement**
 
 ```lisp
@@ -89,6 +98,8 @@ Use the `untell` button to retract the fact from working memory.
 ```lisp
 (isWinning won)
 ```
+
+Use the `query` button to execute.
 
 ### Other Queries
 
